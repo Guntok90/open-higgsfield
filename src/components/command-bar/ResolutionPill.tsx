@@ -1,15 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Diamond, Check, Monitor, Tv, MonitorDot } from "lucide-react";
+import { Check } from "lucide-react";
 import { PillPopover } from "./PillPopover";
 import type { SizeUiResolution } from "@/types";
-
-const RESOLUTION_ICONS: Record<string, React.ElementType> = {
-    "1k": Monitor,
-    "1.5k": Tv,
-    "2k": MonitorDot,
-};
 
 interface ResolutionPillProps {
     resolutions: SizeUiResolution[];
@@ -28,12 +22,14 @@ export function ResolutionPill({ resolutions, value, onChange }: ResolutionPillP
             width="w-fit"
             trigger={
                 <>
-                    {(() => { const Icon = RESOLUTION_ICONS[displayValue] ?? Diamond; return <Icon className="h-3 w-3" />; })()}
-                    <span>{displayValue}</span>
+                    <span className="text-[10px] font-medium tracking-[0.04em]" style={{ color: "rgba(244,247,251,.4)" }}>
+                        Res
+                    </span>
+                    <span className="font-medium uppercase" style={{ color: "rgba(244,247,251,.88)" }}>{displayValue}</span>
                 </>
             }
         >
-            <p className="text-[10px] font-extrabold uppercase tracking-[.08em] mb-2 px-1" style={{ color: "rgba(244,247,251,.44)" }}>
+            <p className="text-[10px] font-semibold uppercase tracking-[.08em] mb-2 px-1" style={{ color: "rgba(244,247,251,.44)" }}>
                 Resolution
             </p>
             <div className="space-y-0.5">
@@ -48,13 +44,12 @@ export function ResolutionPill({ resolutions, value, onChange }: ResolutionPillP
                             style={{
                                 background: selected ? "rgba(213,255,71,.1)" : "transparent",
                                 color: selected ? "#d5ff47" : "#f4f7fb",
-                                fontWeight: selected ? 700 : 500,
+                                fontWeight: selected ? 600 : 500,
                             }}
                             onMouseEnter={(e) => { if (!selected) e.currentTarget.style.background = "rgba(255,255,255,.06)"; }}
                             onMouseLeave={(e) => { if (!selected) e.currentTarget.style.background = "transparent"; }}
                         >
-                            {(() => { const Icon = RESOLUTION_ICONS[res.id] ?? Diamond; return <Icon className="h-3.5 w-3.5 shrink-0" />; })()}
-                            <span>{res.id}</span>
+                            <span className="uppercase">{res.id}</span>
                             {selected && <Check className="h-3.5 w-3.5 ml-auto" style={{ color: "#d5ff47" }} />}
                         </button>
                     );

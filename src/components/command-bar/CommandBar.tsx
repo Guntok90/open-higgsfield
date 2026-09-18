@@ -522,7 +522,7 @@ export function CommandBar({ mode, onModeChange }: CommandBarProps) {
                             key={m}
                             type="button"
                             onClick={() => onModeChange(m)}
-                            className={`flex-1 min-h-0 p-1.5 flex flex-col items-center justify-center gap-[5px] rounded-[14px] text-[10px] font-extrabold tracking-[0.02em] cursor-pointer border transition-colors ${mode === m
+                            className={`flex-1 min-h-0 p-1.5 flex flex-col items-center justify-center gap-[5px] rounded-[14px] text-[10px] font-semibold tracking-[0.02em] cursor-pointer border transition-colors ${mode === m
                                 ? "text-foreground border-white/[.1]"
                                 : "text-muted-foreground border-transparent hover:text-foreground"
                                 }`}
@@ -797,7 +797,6 @@ export function CommandBar({ mode, onModeChange }: CommandBarProps) {
                                             model={imageModel}
                                             fieldValues={imageFieldValues}
                                             onFieldChange={(id, val) => setImageFieldValues((prev) => ({ ...prev, [id]: val }))}
-                                            count={imageControlCount}
                                         />
                                     )}
                                 </>
@@ -805,25 +804,22 @@ export function CommandBar({ mode, onModeChange }: CommandBarProps) {
                         </div>
                     </div>{/* end content wrapper */}
 
-                    {/* Generate button — flex end, large lime */}
+                    {/* Generate button — lime power, no mode subtitle */}
                     <button
                         type="submit"
-                        className="shrink-0 self-center border-none rounded-[22px] font-bold cursor-pointer active:scale-95 transition-transform"
+                        className="shrink-0 self-center border-none rounded-[20px] font-semibold cursor-pointer active:scale-[0.98] transition-transform"
                         style={{
-                            width: 146,
-                            minHeight: 84,
-                            background: "linear-gradient(180deg, #d5ff47, #bcf122)",
+                            width: 132,
+                            minHeight: 72,
+                            background: "linear-gradient(180deg, #d5ff47, #c8f52e)",
                             color: "#0b1118",
-                            fontFamily: "'Space Grotesk', system-ui, sans-serif",
-                            fontSize: 18,
-                            letterSpacing: "-0.04em",
-                            boxShadow: "0 20px 42px rgba(188,241,34,.18)",
+                            fontFamily: "var(--font-space-grotesk), 'Space Grotesk', system-ui, sans-serif",
+                            fontSize: 17,
+                            letterSpacing: "-0.03em",
+                            boxShadow: "0 10px 28px rgba(188,241,34,.12)",
                         }}
                     >
-                        <span>{tCommon("generate")}</span>
-                        <small className="block mt-1 text-[10px] font-extrabold tracking-[.08em] uppercase" style={{ fontFamily: "'Manrope', sans-serif" }}>
-                            {mode === "video" ? tCommon("video") : tCommon("image")}
-                        </small>
+                        {tCommon("generate")}
                     </button>
                 </div>
             </form>

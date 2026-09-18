@@ -1,7 +1,5 @@
 "use client";
 
-import { Sparkles, Shield } from "lucide-react";
-
 interface TogglePillProps {
     label: string;
     icon: "sparkle" | "shield";
@@ -9,17 +7,14 @@ interface TogglePillProps {
     onChange: (value: boolean) => void;
 }
 
-export function TogglePill({ label, icon, value, onChange }: TogglePillProps) {
-    const Icon = icon === "sparkle" ? Sparkles : Shield;
-
+export function TogglePill({ label, value, onChange }: TogglePillProps) {
     return (
         <button
             type="button"
             onClick={() => onChange(!value)}
-            className="flex items-center gap-2 h-9 rounded-[14px] border border-white/[.08] px-3 text-xs font-extrabold transition-all whitespace-nowrap cursor-pointer text-foreground"
-            style={{ background: "rgba(255,255,255,.04)" }}
+            className="flex items-center gap-2 h-9 rounded-[12px] border border-white/[.08] px-2.5 text-[12px] font-medium transition-all whitespace-nowrap cursor-pointer"
+            style={{ background: "rgba(255,255,255,.035)", color: "rgba(244,247,251,.78)" }}
         >
-            <Icon className="h-3.5 w-3.5" />
             <span>{label}</span>
             {/* Custom toggle track */}
             <span

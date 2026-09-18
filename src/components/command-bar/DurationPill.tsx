@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Clock } from "lucide-react";
 import { PillPopover } from "./PillPopover";
 
 interface DurationPillProps {
@@ -20,12 +19,14 @@ export function DurationPill({ durations, value, onChange }: DurationPillProps) 
             width="w-fit"
             trigger={
                 <>
-                    <Clock className="h-3 w-3" />
-                    <span>{value || durations[0]}s</span>
+                    <span className="text-[10px] font-medium tracking-[0.04em]" style={{ color: "rgba(244,247,251,.4)" }}>
+                        Duration
+                    </span>
+                    <span className="font-medium" style={{ color: "rgba(244,247,251,.88)" }}>{value || durations[0]}s</span>
                 </>
             }
         >
-            <p className="text-[10px] font-extrabold uppercase tracking-[.08em] mb-2 px-1" style={{ color: "rgba(244,247,251,.44)" }}>
+            <p className="text-[10px] font-semibold uppercase tracking-[.08em] mb-2 px-1" style={{ color: "rgba(244,247,251,.44)" }}>
                 Duration
             </p>
             <div className="flex flex-wrap gap-1.5">

@@ -80,11 +80,11 @@ export function PillPopover({
                     if (nextOpen) setViewportOffset({ x: 0, y: 0 });
                     onOpenChange(nextOpen);
                 }}
-                className={`flex items-center gap-1.5 h-9 rounded-[14px] border px-3 text-xs font-extrabold transition-all whitespace-nowrap cursor-pointer ${open
+                className={`flex items-center gap-2 h-9 rounded-[12px] border px-2.5 text-[12px] font-medium transition-all whitespace-nowrap cursor-pointer ${open
                     ? "border-white/[.14] text-foreground"
                     : "border-white/[.08] text-foreground hover:border-white/[.14]"
                     }`}
-                style={{ background: open ? "rgba(255,255,255,.08)" : "rgba(255,255,255,.04)" }}
+                style={{ background: open ? "rgba(255,255,255,.07)" : "rgba(255,255,255,.035)" }}
             >
                 {trigger}
             </button>

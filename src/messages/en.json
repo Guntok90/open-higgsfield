@@ -106,7 +106,7 @@
     "tasks": {
         "feedTitle": "Generations",
         "taskCount": "tasks",
-        "empty": "No generations yet. Configure a model and write a prompt to get started.",
+        "empty": "Write a prompt below to generate.",
         "seeMore": "See more",
         "seeLess": "See less",
         "status": {

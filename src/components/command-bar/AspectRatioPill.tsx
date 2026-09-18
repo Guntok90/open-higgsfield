@@ -119,12 +119,14 @@ export function AspectRatioPill({ ratios, value, onChange, customFields, fieldVa
             width="w-fit"
             trigger={
                 <>
-                    <AspectRatioIcon ratio={value} />
-                    <span>{displayValue}</span>
+                    <span className="text-[10px] font-medium tracking-[0.04em]" style={{ color: "rgba(244,247,251,.4)" }}>
+                        Aspect
+                    </span>
+                    <span className="font-medium" style={{ color: "rgba(244,247,251,.88)" }}>{displayValue}</span>
                 </>
             }
         >
-            <p className="text-[10px] font-extrabold uppercase tracking-[.08em] mb-2 px-1" style={{ color: "rgba(244,247,251,.44)" }}>
+            <p className="text-[10px] font-semibold uppercase tracking-[.08em] mb-2 px-1" style={{ color: "rgba(244,247,251,.44)" }}>
                 Aspect Ratio
             </p>
 
@@ -136,7 +138,7 @@ export function AspectRatioPill({ ratios, value, onChange, customFields, fieldVa
                     {portrait.length > 0 && (
                         <>
                             <div className="h-px my-1.5" style={{ background: "rgba(255,255,255,.08)" }} />
-                            <p className="text-[10px] font-extrabold uppercase tracking-[.08em] mb-1 px-2" style={{ color: "rgba(244,247,251,.44)" }}>Portrait</p>
+                            <p className="text-[10px] font-semibold uppercase tracking-[.08em] mb-1 px-2" style={{ color: "rgba(244,247,251,.44)" }}>Portrait</p>
                             <div className="space-y-0.5">
                                 {portrait.map(([val, label]) => (
                                     <div key={val}>{renderRatioButton(val, label)}</div>
@@ -157,7 +159,7 @@ export function AspectRatioPill({ ratios, value, onChange, customFields, fieldVa
                     {landscape.length > 0 && (
                         <>
                             <div className="h-px my-1.5" style={{ background: "rgba(255,255,255,.08)" }} />
-                            <p className="text-[10px] font-extrabold uppercase tracking-[.08em] mb-1 px-2" style={{ color: "rgba(244,247,251,.44)" }}>Landscape</p>
+                            <p className="text-[10px] font-semibold uppercase tracking-[.08em] mb-1 px-2" style={{ color: "rgba(244,247,251,.44)" }}>Landscape</p>
                             <div className="space-y-0.5">
                                 {landscape.map(([val, label]) => (
                                     <div key={val}>{renderRatioButton(val, label)}</div>

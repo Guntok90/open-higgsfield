@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Wand2, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { PillPopover } from "./PillPopover";
 import { VIDEO_CAPABILITIES, VIDEO_CAPABILITY_GROUPS, getVideoCapabilitiesByGroup } from "@/models/capabilities/video";
 import type { AttachmentItem } from "@/components/studio/AttachmentZone";
@@ -26,12 +26,14 @@ export function VideoModelPill({ modelId, variantId: _variantId, onModelChange }
             contentClassName="flex max-h-[70dvh] min-h-0 flex-col overflow-hidden"
             trigger={
                 <>
-                    <Wand2 className="h-3 w-3" />
-                    <span>{label}</span>
+                    <span className="text-[10px] font-medium tracking-[0.04em]" style={{ color: "rgba(244,247,251,.4)" }}>
+                        Model
+                    </span>
+                    <span className="font-medium" style={{ color: "rgba(244,247,251,.88)" }}>{label}</span>
                 </>
             }
         >
-            <p className="mb-2 shrink-0 px-1 text-[10px] font-extrabold uppercase tracking-[.08em]" style={{ color: "rgba(244,247,251,.44)" }}>
+            <p className="mb-2 shrink-0 px-1 text-[10px] font-semibold uppercase tracking-[.08em]" style={{ color: "rgba(244,247,251,.44)" }}>
                 Model
             </p>
             <div className="model-scrollbar min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain pr-1">
@@ -57,7 +59,7 @@ export function VideoModelPill({ modelId, variantId: _variantId, onModelChange }
                                                 style={{
                                                     background: isSelected ? "rgba(213,255,71,.1)" : "transparent",
                                                     color: isSelected ? "#d5ff47" : "#f4f7fb",
-                                                    fontWeight: isSelected ? 700 : 500,
+                                                    fontWeight: isSelected ? 600 : 500,
                                                 }}
                                                 onMouseEnter={(e) => {
                                                     if (!isSelected) e.currentTarget.style.background = "rgba(255,255,255,.06)";

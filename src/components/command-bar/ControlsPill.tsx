@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Settings2 } from "lucide-react";
 import { PillPopover } from "./PillPopover";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -13,10 +12,9 @@ interface ControlsPillProps {
     model: ImageModelCapability;
     fieldValues: Record<string, unknown>;
     onFieldChange: (id: string, value: unknown) => void;
-    count: number;
 }
 
-export function ControlsPill({ model, fieldValues, onFieldChange, count }: ControlsPillProps) {
+export function ControlsPill({ model, fieldValues, onFieldChange }: ControlsPillProps) {
     const [open, setOpen] = useState(false);
 
     // Filter out prompt pill, width/height (AspectRatioPill custom), aspect_ratio and resolution (shown as dedicated pills)
@@ -37,14 +35,11 @@ export function ControlsPill({ model, fieldValues, onFieldChange, count }: Contr
             width="w-[34rem]"
             contentClassName="overflow-hidden"
             trigger={
-                <>
-                    <Settings2 className="h-3 w-3" />
-                    <span>{count} controls</span>
-                </>
+                <span className="font-medium" style={{ color: "rgba(244,247,251,.78)" }}>More options</span>
             }
         >
-            <p className="text-[10px] font-extrabold uppercase tracking-[.08em] mb-2 px-1" style={{ color: "rgba(244,247,251,.44)" }}>
-                More controls
+            <p className="text-[10px] font-semibold uppercase tracking-[.08em] mb-2 px-1" style={{ color: "rgba(244,247,251,.44)" }}>
+                More options
             </p>
             <div className="grid grid-cols-1 items-start gap-x-4 gap-y-3 px-1 pb-1 sm:grid-cols-2">
 
