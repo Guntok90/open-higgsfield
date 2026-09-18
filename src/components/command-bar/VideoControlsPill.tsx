@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Settings2 } from "lucide-react";
 import { PillPopover } from "./PillPopover";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -52,15 +51,12 @@ export function VideoControlsPill({ model, settings, onSettingsChange }: VideoCo
             width="w-[42rem]"
             contentClassName="overflow-hidden"
             trigger={
-                <>
-                    <Settings2 className="h-3 w-3" />
-                    <span>Controls</span>
-                </>
+                <span className="font-medium" style={{ color: "rgba(244,247,251,.78)" }}>More options</span>
             }
         >
             <div className="px-1">
-                <p className="mb-4 text-[10px] font-extrabold uppercase tracking-[.08em]" style={{ color: "rgba(244,247,251,.44)" }}>
-                    Advanced controls
+                <p className="mb-4 text-[10px] font-semibold uppercase tracking-[.08em]" style={{ color: "rgba(244,247,251,.44)" }}>
+                    More options
                 </p>
 
                 <div className="space-y-4">

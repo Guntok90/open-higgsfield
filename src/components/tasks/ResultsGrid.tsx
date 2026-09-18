@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Inbox, Download, Trash2, Clock, AlertCircle, Volume2, VolumeX } from "lucide-react";
+import { Download, Trash2, Clock, AlertCircle, Volume2, VolumeX } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { IMAGE_CAPABILITIES } from "@/models/capabilities/image";
 import { VIDEO_CAPABILITIES } from "@/models/capabilities/video";
@@ -88,16 +88,17 @@ export function ResultsGrid({ mode }: ResultsGridProps) {
     return (
         <div className="h-full overflow-y-auto" style={{ paddingBottom: 296 }}>
             {isEmpty ? (
-                <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-4">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl" style={{ background: "rgba(255,255,255,.04)" }}>
-                        <Inbox className="h-8 w-8" style={{ color: "rgba(244,247,251,.24)" }} />
-                    </div>
-                    <div>
-                        <p className="text-sm font-medium" style={{ color: "rgba(244,247,251,.44)" }}>{t("empty")}</p>
-                        <p className="text-xs mt-1" style={{ color: "rgba(244,247,251,.28)" }}>
-                            {mode === "video" ? "Generate a video to see results here" : "Generate an image to see results here"}
-                        </p>
-                    </div>
+                <div className="relative flex flex-col items-center justify-center h-full text-center px-6" style={{ paddingTop: 24 }}>
+                    <div className="studio-empty-grid pointer-events-none absolute inset-0" aria-hidden />
+                    <p
+                        className="relative max-w-[22rem] text-[15px] font-medium leading-relaxed tracking-[-0.01em]"
+                        style={{
+                            fontFamily: "var(--font-space-grotesk), 'Space Grotesk', system-ui, sans-serif",
+                            color: "rgba(244,247,251,.42)",
+                        }}
+                    >
+                        {t("empty")}
+                    </p>
                 </div>
             ) : (
                 <div className="p-5">

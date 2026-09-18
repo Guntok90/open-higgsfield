@@ -135,3 +135,48 @@
     border-radius: 999px;
   }
 }
+
+/* Studio stage — quiet depth without shimmer */
+.studio-stage {
+  background: #050505;
+}
+
+.studio-stage__ambient {
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 38%, rgba(255, 255, 255, .035), transparent 68%),
+    radial-gradient(ellipse 40% 28% at 78% 72%, rgba(213, 255, 71, .045), transparent 70%),
+    linear-gradient(180deg, #070707 0%, #050505 42%, #040404 100%);
+}
+
+.studio-stage__ambient::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 46%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, .06) 20%,
+    rgba(255, 255, 255, .08) 50%,
+    rgba(255, 255, 255, .06) 80%,
+    transparent
+  );
+}
+
+.studio-stage__grain {
+  opacity: .035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+.studio-empty-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 55% 45% at 50% 50%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 55% 45% at 50% 50%, #000 20%, transparent 75%);
+}

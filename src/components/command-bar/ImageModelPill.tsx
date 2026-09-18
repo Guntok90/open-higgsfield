@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Wand2, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { PillPopover } from "./PillPopover";
 import { IMAGE_CAPABILITIES, IMAGE_CAPABILITY_GROUPS, getImageCapabilitiesByGroup } from "@/models/capabilities/image";
 import { getEditVariant } from "@/models/capabilities/image-helpers";
@@ -37,12 +37,14 @@ export function ImageModelPill({ modelId, onModelChange, slotFiles }: ImageModel
             contentClassName="flex max-h-[70dvh] min-h-0 flex-col overflow-hidden"
             trigger={
                 <>
-                    <Wand2 className="h-3 w-3" />
-                    <span>{label}</span>
+                    <span className="text-[10px] font-medium tracking-[0.04em]" style={{ color: "rgba(244,247,251,.4)" }}>
+                        Model
+                    </span>
+                    <span className="font-medium" style={{ color: "rgba(244,247,251,.88)" }}>{label}</span>
                 </>
             }
         >
-            <p className="mb-2 shrink-0 px-1 text-[10px] font-extrabold uppercase tracking-[.08em]" style={{ color: "rgba(244,247,251,.44)" }}>
+            <p className="mb-2 shrink-0 px-1 text-[10px] font-semibold uppercase tracking-[.08em]" style={{ color: "rgba(244,247,251,.44)" }}>
                 Model
             </p>
             <div className="model-scrollbar min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain pr-1">
@@ -56,7 +58,7 @@ export function ImageModelPill({ modelId, onModelChange, slotFiles }: ImageModel
                         if (visibleModels.length === 0) return null;
                         return (
                             <div key={group}>
-                                <p className="text-[11px] font-bold px-1 py-1" style={{ color: "rgba(244,247,251,.72)" }}>{group}</p>
+                                <p className="text-[11px] font-semibold px-1 py-1" style={{ color: "rgba(244,247,251,.72)" }}>{group}</p>
                                 <div className="space-y-0.5">
                                     {visibleModels.map((m) => {
                                         const isSelected = m.id === modelId;
@@ -73,7 +75,7 @@ export function ImageModelPill({ modelId, onModelChange, slotFiles }: ImageModel
                                                 style={{
                                                     background: isSelected ? "rgba(213,255,71,.1)" : "transparent",
                                                     color: isSelected ? "#d5ff47" : "#f4f7fb",
-                                                    fontWeight: isSelected ? 700 : 500,
+                                                    fontWeight: isSelected ? 600 : 500,
                                                 }}
                                                 onMouseEnter={(e) => {
                                                     if (!isSelected) e.currentTarget.style.background = "rgba(255,255,255,.06)";
@@ -81,9 +83,9 @@ export function ImageModelPill({ modelId, onModelChange, slotFiles }: ImageModel
                                                 onMouseLeave={(e) => {
                                                     if (!isSelected) e.currentTarget.style.background = "transparent";
                                                 }}
-                                                >
-                                                    <span className="truncate">{m.label}</span>
-                                                    <div className="flex items-center gap-2 shrink-0">
+                                            >
+                                                <span className="truncate">{m.label}</span>
+                                                <div className="flex items-center gap-2 shrink-0">
                                                     {isSelected && <Check className="h-3.5 w-3.5" style={{ color: "#d5ff47" }} />}
                                                 </div>
                                             </button>
