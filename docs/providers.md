@@ -41,6 +41,31 @@ AI_GATEWAY_API_KEY=
 
 The current catalog includes Google, Black Forest Labs, Recraft, OpenAI, Alibaba Wan and KlingAI models exposed through the gateway.
 
+## xAI Grok Imagine
+
+```dotenv
+XAI_API_KEY=
+```
+
+Official HTTP against `https://api.x.ai/v1` with Bearer auth. Catalog modes:
+
+- Text-to-image and image edit (up to 5 reference images) via `grok-imagine-image-2.0`
+- Text-to-video and image-to-video via `grok-imagine-video-1.5` (async poll)
+
+X OAuth login is unrelated — Imagine always uses `XAI_API_KEY` on the server.
+
+## Studio access (X / Twitter OAuth)
+
+```dotenv
+AUTH_SECRET=
+AUTH_URL=
+AUTH_TWITTER_ID=
+AUTH_TWITTER_SECRET=
+AUTH_ALLOWED_X_USERNAMES=
+```
+
+Auth.js (NextAuth v5) gates the studio and generation APIs. Only allowlisted X usernames (comma-separated, without `@`) can sign in. Leave `AUTH_ALLOWED_X_USERNAMES` empty until HQ fills it — an empty allowlist admits nobody. `NEXTAUTH_URL` / `NEXTAUTH_SECRET` are accepted aliases where Auth.js still recognizes them.
+
 ## Reference media uploads
 
 Some providers require a public URL for asynchronous image/video inputs. Open-Higgsfield uses Cloudinary for this handoff.

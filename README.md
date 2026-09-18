@@ -65,8 +65,9 @@ AI media models are spread across providers, dashboards, payload formats, and in
 | Google AI Studio | 3 | 1 | `GEMINI_API_KEY` |
 | Google Vertex AI | 2 | 1 | Google Cloud credentials |
 | Vercel AI Gateway | 5 | 5 | `AI_GATEWAY_API_KEY` |
+| xAI Grok Imagine | 1 | 1 | `XAI_API_KEY` |
 
-The catalog includes Gemini Image, Veo, Flux, Recraft, GPT Image, Kling, Wan, Runway, Seedance, Seedream, PixVerse, LTX, MiniMax, Z-Image, and OmniHuman. Model availability, pricing, quotas, and preview access are controlled by each upstream provider.
+The catalog includes Grok Imagine, Gemini Image, Veo, Flux, Recraft, GPT Image, Kling, Wan, Runway, Seedance, Seedream, PixVerse, LTX, MiniMax, Z-Image, and OmniHuman. Model availability, pricing, quotas, and preview access are controlled by each upstream provider.
 
 See [Providers and models](docs/providers.md) for credentials, provider behavior, and extension instructions.
 
@@ -96,7 +97,8 @@ See [Providers and models](docs/providers.md) for credentials, provider behavior
 - Next.js App Router and server route handlers
 - React 19, strict TypeScript, Tailwind CSS 4, and Framer Motion
 - Capability-driven model catalog and provider-neutral generation contracts
-- Freepik API, Google Gen AI SDK, Vertex AI, and Vercel AI Gateway
+- Freepik API, Google Gen AI SDK, Vertex AI, Vercel AI Gateway, and xAI Imagine
+- Auth.js (NextAuth v5) X/Twitter OAuth allowlist for studio access
 - Cloudinary handoff for workflows that require public reference-media URLs
 - PostgreSQL/Neon image history with a local filesystem fallback
 
@@ -112,10 +114,12 @@ flowchart LR
     R --> G[Google AI Studio]
     R --> V[Vertex AI]
     R --> W[Vercel AI Gateway]
+    R --> X[xAI Imagine]
     F --> T[Normalized tasks and assets]
     G --> T
     V --> T
     W --> T
+    X --> T
     T --> U
 ```
 
@@ -159,9 +163,16 @@ Key variables from [`.env.example`](.env.example):
 | `GOOGLE_CLOUD_LOCATION` | Vertex AI location (default `global`) |
 | `GOOGLE_SERVICE_ACCOUNT_JSON` / `GOOGLE_CLOUD_CREDENTIALS` | Vertex AI service-account JSON (inline) |
 | `AI_GATEWAY_API_KEY` | Vercel AI Gateway |
+| `XAI_API_KEY` | xAI Grok Imagine (server-only) |
+| `AUTH_SECRET` | Auth.js session secret |
+| `AUTH_URL` / `NEXTAUTH_URL` | Public app URL for OAuth callbacks |
+| `AUTH_TWITTER_ID` / `AUTH_TWITTER_SECRET` | X developer app client id/secret |
+| `AUTH_ALLOWED_X_USERNAMES` | Comma-separated X handles allowed into the studio (no `@`) |
 | `DATABASE_URL` | Optional PostgreSQL / Neon history |
 | `CLOUDINARY_*` | Optional public reference-media hosting (`CLOUDINARY_URL`, or `CLOUDINARY_CLOUD_NAME` / `CLOUDINARY_API_KEY` / `CLOUDINARY_API_SECRET`) |
 | `OPEN_HIGGSFIELD_STORAGE_DIR` | Optional local runtime storage directory |
+
+X OAuth is **access control only**. Grok Imagine generation always uses `XAI_API_KEY` on the server — never the X session cookie.
 
 ### 2. Configure the environment
 

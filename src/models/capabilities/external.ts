@@ -216,12 +216,62 @@ export const EXTERNAL_IMAGE_CAPABILITIES: Record<string, ExternalImageCapability
         mode: "image-model",
         sortKey: 7000,
     }),
+    "xai__grok-imagine-image-2.0": {
+        id: "xai__grok-imagine-image-2.0",
+        label: "Grok Imagine Image 2.0",
+        family: "Grok Imagine",
+        variant: "",
+        group: "xAI",
+        category: "Generate / Edit",
+        provider: "xai",
+        provider_model_id: "grok-imagine-image-2.0",
+        provider_mode: "native-image",
+        prompt_required: true,
+        duration: false,
+        aspect_ratio: false,
+        size: false,
+        resolution_variant: false,
+        negative_prompt: false,
+        cfg_scale: false,
+        style: false,
+        shot_type: false,
+        prompt_expansion: false,
+        elements: false,
+        media_slots: [{
+            id: "reference_images",
+            label: "Reference images",
+            kind: "image",
+            multiple: true,
+            description: "Optional — up to 5 images for edit / multi-reference (edit when present, generate when absent)",
+        }],
+        custom_fields: [
+            { id: "n", label: "Images", type: "number", default: 1, minimum: 1, maximum: 10 },
+        ],
+        size_ui: {
+            width_field: "width",
+            height_field: "height",
+            aspect_ratios: [
+                ...IMAGE_RATIOS,
+                { id: "2:1", w: 2, h: 1 },
+                { id: "1:2", w: 1, h: 2 },
+                { id: "21:9", w: 21, h: 9 },
+            ],
+            resolutions: [
+                { id: "1k", base: 1024 },
+                { id: "2k", base: 2048 },
+            ],
+            default_aspect: "1:1",
+            default_resolution: "1k",
+        },
+        has_edit_variant: false,
+        sort_key: 8100,
+    },
 };
 
 function videoCapability(options: {
     id: string;
     label: string;
-    provider: "google-ai-studio" | "google-vertex" | "vercel-ai-gateway";
+    provider: "google-ai-studio" | "google-vertex" | "vercel-ai-gateway" | "xai";
     providerModelId: string;
     group: string;
     family: string;
@@ -229,10 +279,21 @@ function videoCapability(options: {
     imageRequired?: boolean;
     supportsEndFrame?: boolean;
     generateAudio?: boolean;
+    aspectRatios?: Array<[string, string]>;
+    resolutions?: string[];
+    defaultResolution?: string;
 }): ModelCapabilities {
     const slots: ModelCapabilities["media_slots"] = [];
-    if (options.imageRequired || options.supportsEndFrame) {
-        slots.push({ id: "start_image", label: "Start frame", kind: "image", required: options.imageRequired });
+    if (options.imageRequired || options.supportsEndFrame || options.provider === "xai") {
+        slots.push({
+            id: "start_image",
+            label: "Start frame",
+            kind: "image",
+            required: options.imageRequired,
+            description: options.provider === "xai"
+                ? "Optional — omit for text-to-video, provide for image-to-video"
+                : undefined,
+        });
     }
     if (options.supportsEndFrame) {
         slots.push({ id: "end_image", label: "End frame", kind: "image" });
@@ -250,17 +311,23 @@ function videoCapability(options: {
         prompt_required: true,
         prompt_max: 2500,
         duration: { options: options.duration ?? ["4", "6", "8"], default: options.duration?.[0] ?? "4" },
-        aspect_ratio: { options: [["16:9", "16:9"], ["9:16", "9:16"]], default: ["16:9", "16:9"] },
+        aspect_ratio: {
+            options: options.aspectRatios ?? [["16:9", "16:9"], ["9:16", "9:16"]],
+            default: ["16:9", "16:9"],
+        },
         size: false,
-        resolution_variant: { options: ["720p", "1080p"], default: "720p" },
-        negative_prompt: true,
+        resolution_variant: {
+            options: options.resolutions ?? ["720p", "1080p"],
+            default: options.defaultResolution ?? options.resolutions?.[0] ?? "720p",
+        },
+        negative_prompt: options.provider !== "xai",
         cfg_scale: false,
         style: false,
         shot_type: false,
-        prompt_expansion: true,
+        prompt_expansion: options.provider !== "xai",
         elements: false,
         media_slots: slots,
-        custom_fields: options.generateAudio === false ? [] : [
+        custom_fields: options.generateAudio === false || options.provider === "xai" ? [] : [
             { id: "generate_audio", label: "Generate Audio", type: "checkbox", default: true },
         ],
     };
@@ -334,5 +401,26 @@ export const EXTERNAL_VIDEO_CAPABILITIES: Record<string, ModelCapabilities> = {
         duration: ["5", "10"],
         imageRequired: true,
         supportsEndFrame: true,
+    }),
+    "xai__grok-imagine-video-1.5": videoCapability({
+        id: "xai__grok-imagine-video-1.5",
+        label: "Grok Imagine Video 1.5",
+        provider: "xai",
+        providerModelId: "grok-imagine-video-1.5",
+        group: "xAI",
+        family: "Grok Imagine",
+        duration: ["6", "10", "12", "15"],
+        aspectRatios: [
+            ["1:1", "1:1"],
+            ["16:9", "16:9"],
+            ["9:16", "9:16"],
+            ["4:3", "4:3"],
+            ["3:4", "3:4"],
+            ["3:2", "3:2"],
+            ["2:3", "2:3"],
+        ],
+        resolutions: ["480p", "720p", "1080p"],
+        defaultResolution: "720p",
+        generateAudio: false,
     }),
 };
