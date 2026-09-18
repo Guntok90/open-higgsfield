@@ -12,7 +12,6 @@ interface ControlsPillProps {
     model: ImageModelCapability;
     fieldValues: Record<string, unknown>;
     onFieldChange: (id: string, value: unknown) => void;
-    count: number;
 }
 
 export function ControlsPill({ model, fieldValues, onFieldChange }: ControlsPillProps) {

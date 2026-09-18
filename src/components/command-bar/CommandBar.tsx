@@ -797,7 +797,6 @@ export function CommandBar({ mode, onModeChange }: CommandBarProps) {
                                             model={imageModel}
                                             fieldValues={imageFieldValues}
                                             onFieldChange={(id, val) => setImageFieldValues((prev) => ({ ...prev, [id]: val }))}
-                                            count={imageControlCount}
                                         />
                                     )}
                                 </>

@@ -4,7 +4,10 @@ export function StudioTopbar() {
   return (
     <header
       className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-center justify-between px-5 sm:px-7"
-      style={{ height: 52 }}
+      style={{
+        height: 56,
+        background: "linear-gradient(180deg, rgba(5,5,5,.72) 0%, rgba(5,5,5,.28) 70%, transparent 100%)",
+      }}
     >
       <div className="flex items-center gap-2.5">
         <span
