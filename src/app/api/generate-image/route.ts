@@ -88,7 +88,8 @@ export async function POST(req: NextRequest) {
       converted.push(remoteUrl);
     }
 
-    media.images = { ...media.images, [slotId]: slot.accept === "b64_only" ? converted[0] : converted[0] };
+    const value = slot.multiple && converted.length > 1 ? converted : converted[0];
+    media.images = { ...media.images, [slotId]: value as string };
   }
 
   // Validate required slots
