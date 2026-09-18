@@ -140,34 +140,36 @@ cd open-higgsfield
 npm install
 ```
 
+### Where to put your API keys (BYOK)
+
+Open-Higgsfield is bring-your-own-key. Paste provider credentials only into **server-side** environment variables — never commit secrets to the repo, and never use `NEXT_PUBLIC_` for platform keys.
+
+| Where you run | Where you paste keys |
+| --- | --- |
+| Local | Copy `.env.example` → `.env.local`, then fill in only what you need |
+| Vercel | Project Settings → Environment Variables (set for **Production** and **Preview**) |
+
+Key variables from [`.env.example`](.env.example):
+
+| Variable | Purpose |
+| --- | --- |
+| `FREEPIK_API_KEY` | Freepik |
+| `GEMINI_API_KEY` | Google AI Studio |
+| `GOOGLE_CLOUD_PROJECT` | Google Vertex AI project |
+| `GOOGLE_CLOUD_LOCATION` | Vertex AI location (default `global`) |
+| `GOOGLE_SERVICE_ACCOUNT_JSON` / `GOOGLE_CLOUD_CREDENTIALS` | Vertex AI service-account JSON (inline) |
+| `AI_GATEWAY_API_KEY` | Vercel AI Gateway |
+| `DATABASE_URL` | Optional PostgreSQL / Neon history |
+| `CLOUDINARY_*` | Optional public reference-media hosting (`CLOUDINARY_URL`, or `CLOUDINARY_CLOUD_NAME` / `CLOUDINARY_API_KEY` / `CLOUDINARY_API_SECRET`) |
+| `OPEN_HIGGSFIELD_STORAGE_DIR` | Optional local runtime storage directory |
+
 ### 2. Configure the environment
 
 ```bash
 cp .env.example .env.local
 ```
 
-Configure only the providers you want to use:
-
-```dotenv
-# Freepik
-FREEPIK_API_KEY=
-
-# Google AI Studio
-GEMINI_API_KEY=
-
-# Google Vertex AI
-GOOGLE_CLOUD_PROJECT=
-GOOGLE_CLOUD_LOCATION=global
-GOOGLE_SERVICE_ACCOUNT_JSON=
-
-# Vercel AI Gateway
-AI_GATEWAY_API_KEY=
-
-# Reference-media uploads
-CLOUDINARY_URL=
-```
-
-Never use `NEXT_PUBLIC_` for provider credentials. Open-Higgsfield reads them only from server-side modules.
+Configure only the providers you want to use. Open-Higgsfield reads these credentials only from server-side modules.
 
 ### 3. Start Open-Higgsfield
 
